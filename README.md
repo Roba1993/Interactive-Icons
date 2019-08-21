@@ -1,5 +1,5 @@
 # Live-Icons
-Plain JS Interactive Icons based upon SVG
+Plain JS Interactive Icons based upon SVG [demo here](https://roba1993.github.io/Live-Icons/)
 
 ### Library goals
 * Dependency free library
