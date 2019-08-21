@@ -1,8 +1,14 @@
 # Live-Icons
 Plain JS Webcomponents Interactive Icons based upon SVG
 
+# Usage
+### NPM
+tbd
 
-# Demo
+### Plain HTML
+The Live Icons can be leveraged
+
+# Light Demo
 ![Light Icon Example](https://raw.githubusercontent.com/Roba1993/Live-Icons/master/img/light.gif)
 
 Light icon visualized as a light-bulb to show status and color.
@@ -26,7 +32,7 @@ Light icon visualized as a light-bulb to show status and color.
 </div>
 ```
 
-
+# Blind Demo
 ![Blind Icon Example](https://raw.githubusercontent.com/Roba1993/Live-Icons/master/img/blind.gif)
 
 Blind icon to show the position of a blind
@@ -48,7 +54,7 @@ Blind icon to show the position of a blind
 </div>
 ```
 
-
+# Socket Demo
 ![Socket Icon Example](https://raw.githubusercontent.com/Roba1993/Live-Icons/master/img/socket.gif)
 
 Socket icon to visualize if something is plugged in.
@@ -67,7 +73,7 @@ Socket icon to visualize if something is plugged in.
 </div>
 ```
 
-
+# Meter Demo
 ![Meter Icon Example](https://raw.githubusercontent.com/Roba1993/Live-Icons/master/img/meter.gif)
 
 Meter icon to visualize a consumption.

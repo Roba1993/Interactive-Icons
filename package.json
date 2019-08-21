@@ -1,14 +1,14 @@
 {
-  "name": "interactive-icons",
+  "name": "live-icons",
   "version": "1.0.0",
-  "description": "Plain JS Webcomponents Interactive Icons based upon SVG",
+  "description": "Plain JS Webcomponents Live Icons based upon SVG",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Roba1993/Interactive-Icons.git"
+    "url": "git+https://github.com/Roba1993/Live-Icons.git"
   },
   "keywords": [
     "webcomponents",
@@ -20,7 +20,7 @@
   "author": "Robert Schütte",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Roba1993/Interactive-Icons/issues"
+    "url": "https://github.com/Roba1993/Live-Icons/issues"
   },
-  "homepage": "https://github.com/Roba1993/Interactive-Icons#readme"
+  "homepage": "https://github.com/Roba1993/Live-Icons#readme"
 }
