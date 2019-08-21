@@ -1,12 +1,27 @@
 # Live-Icons
-Plain JS Webcomponents Interactive Icons based upon SVG
+Plain JS Interactive Icons based upon SVG
 
-# Usage
+### Library goals
+* Dependency free library
+* Easy to use, understand and to extend
+* Native es6 with Classes and webcomponents
+* Open to contribute for everyone
+
+# Installation
 ### NPM
-tbd
+To use this library with npm, just install it with the following command.
+```bash
+npm i live-icons
+```
 
 ### Plain HTML
-The Live Icons can be leveraged
+You can use this library by just downloading the `index.js` file and include it into your project.
+
+# Usage
+The library can be used in two different ways:
+1. As ready to use webcomponents as shown in the examples below. 
+    After the `.js` file is loaded, just call the function `registerInteractiveIcons()` to register the icons as webcomponents.
+1. As es6 classes to manually create objects and attach them to your DOM programmatically or enhance them with additional functionality.
 
 # Light Demo
 ![Light Icon Example](https://raw.githubusercontent.com/Roba1993/Live-Icons/master/img/light.gif)
@@ -92,3 +107,16 @@ Meter icon to visualize a consumption.
         oninput="document.querySelector('live-icon-meter').value = this.value">
 </div>
 ```
+
+# Contributing
+Please contribute! 
+
+The goal is to make this library as usefull as possible :)
+
+If you need any kind of help, open an issue or write me an mail.
+Pull requests are welcome!
+
+# License
+Copyright © 2019 Robert Schütte
+
+Distributed under the [MIT License](LICENSE).
