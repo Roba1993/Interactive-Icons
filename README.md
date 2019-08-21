@@ -15,14 +15,14 @@ Light icon visualized as a light-bulb to show status and color.
 ```javascript
 <div>
     <div style="width: 300px; height: 300px;">
-        <heima-light></heima-light>
+        <live-icon-light />
     </div>
     <input type="range" min="0" max="1" value="0" step="0.001"
-        oninput="document.querySelector('heima-light').power = this.value">
-    <button onclick="document.querySelector('heima-light').setAttribute('power', 1)">On</button>
-    <button onclick="document.querySelector('heima-light').power = 0">Off</button>
+        oninput="document.querySelector('live-icon-light').power = this.value">
+    <button onclick="document.querySelector('live-icon-light').setAttribute('power', 1)">On</button>
+    <button onclick="document.querySelector('live-icon-light').power = 0">Off</button>
     <input type="color" name="favcolor" value="#ff0000"
-        onchange="document.querySelector('heima-light').color = this.value; console.log(this.value);">
+        onchange="document.querySelector('live-icon-light').color = this.value; console.log(this.value);">
 </div>
 ```
 
@@ -39,19 +39,19 @@ Blind icon to show the position of a blind
 ```javascript
 <div>
     <div style="width: 300px; height: 300px;">
-        <heima-blind />
+        <live-icon-blind />
     </div>
     <input type="range" min="0" max="1" value="0" step="0.001"
-        oninput="document.querySelector('heima-blind').open = this.value">
+        oninput="document.querySelector('live-icon-blind').open = this.value">
     <input type="range" min="0" max="1" value="0" step="0.001"
-        oninput="document.querySelector('heima-blind').angle = this.value">
+        oninput="document.querySelector('live-icon-blind').angle = this.value">
 </div>
 ```
 
 
 ![Socket Icon Example](https://raw.githubusercontent.com/Roba1993/Live-Icons/master/img/socket.gif)
 
-Meter icon to visualize a consumption.
+Socket icon to visualize if something is plugged in.
 
 ### Attributes:
 * power: Integer either 0 or 1 to visualize the status
@@ -60,10 +60,10 @@ Meter icon to visualize a consumption.
 ```javascript
 <div>
     <div style="width: 300px; height: 300px;">
-        <heima-socket />
+        <live-icon-socket />
     </div>
-    <button onclick="document.querySelector('heima-socket').setAttribute('power', 1)">On</button>
-    <button onclick="document.querySelector('heima-socket').power = 0">Off</button>
+    <button onclick="document.querySelector('live-icon-socket').setAttribute('power', 1)">On</button>
+    <button onclick="document.querySelector('live-icon-socket').power = 0">Off</button>
 </div>
 ```
 
@@ -80,9 +80,9 @@ Meter icon to visualize a consumption.
 ```javascript
 <div>
     <div style="width: 300px; height: 300px;">
-        <heima-meter max="9999" />
+        <live-icon-meter max="9999" />
     </div>
     <input type="range" min="0" max="9999" value="0" step="0.001"
-        oninput="document.querySelector('heima-meter').value = this.value">
+        oninput="document.querySelector('live-icon-meter').value = this.value">
 </div>
 ```

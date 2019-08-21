@@ -19,11 +19,11 @@
             <live-icon-light />
         </div>
         <input type="range" min="0" max="1" value="0" step="0.001"
-            oninput="document.querySelector('heima-light').power = this.value">
-        <button onclick="document.querySelector('heima-light').setAttribute('power', 1)">On</button>
-        <button onclick="document.querySelector('heima-light').power = 0">Off</button>
+            oninput="document.querySelector('live-icon-light').power = this.value">
+        <button onclick="document.querySelector('live-icon-light').setAttribute('power', 1)">On</button>
+        <button onclick="document.querySelector('live-icon-light').power = 0">Off</button>
         <input type="color" name="favcolor" value="#ff0000"
-            onchange="document.querySelector('heima-light').color = this.value; console.log(this.value);">
+            onchange="document.querySelector('live-icon-light').color = this.value; console.log(this.value);">
     </div>
 
     <br /><br /><br />
@@ -33,9 +33,9 @@
             <live-icon-blind />
         </div>
         <input type="range" min="0" max="1" value="0" step="0.001"
-            oninput="document.querySelector('heima-blind').open = this.value">
+            oninput="document.querySelector('live-icon-blind').open = this.value">
         <input type="range" min="0" max="1" value="0" step="0.001"
-            oninput="document.querySelector('heima-blind').angle = this.value">
+            oninput="document.querySelector('live-icon-blind').angle = this.value">
     </div>
 
     <br /><br /><br />
@@ -45,7 +45,7 @@
             <live-icon-meter max="9999" />
         </div>
         <input type="range" min="0" max="9999" value="0" step="0.001"
-            oninput="document.querySelector('heima-meter').value = this.value">
+            oninput="document.querySelector('live-icon-meter').value = this.value">
     </div>
 
     <br /><br /><br />
@@ -54,8 +54,8 @@
         <div style="width: 300px; height: 300px;">
             <live-icon-socket />
         </div>
-        <button onclick="document.querySelector('heima-socket').setAttribute('power', 1)">On</button>
-        <button onclick="document.querySelector('heima-socket').power = 0">Off</button>
+        <button onclick="document.querySelector('live-icon-socket').setAttribute('power', 1)">On</button>
+        <button onclick="document.querySelector('live-icon-socket').power = 0">Off</button>
     </div>
 
     <br /><br /><br />
