@@ -14,6 +14,11 @@ To use this library with npm, just install it with the following command.
 npm i live-icons
 ```
 
+In your JavaScript file, import the project like following
+```javascript
+import 'live-icons';
+```
+
 ### Plain HTML
 You can use this library by just downloading the `index.js` file and include it into your project.
 
@@ -21,7 +26,7 @@ You can use this library by just downloading the `index.js` file and include it 
 The library can be used in two different ways:
 1. As ready to use webcomponents as shown in the examples below. 
     After the `.js` file is loaded, just call the function `registerInteractiveIcons()` to register the icons as webcomponents.
-1. As es6 classes to manually create objects and attach them to your DOM programmatically or enhance them with additional functionality.
+2. As es6 classes to manually create objects and attach them to your DOM programmatically or enhance them with additional functionality.
 
 # Light Demo
 ![Light Icon Example](https://raw.githubusercontent.com/Roba1993/Live-Icons/master/img/light.gif)

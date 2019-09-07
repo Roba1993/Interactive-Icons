@@ -1,7 +1,7 @@
 /**
  * Function to register all icons as custom elements.
  */
-function registerInteractiveIcons() {
+window.registerInteractiveIcons = function() {
     customElements.define("live-icon-weather", Weather);
     customElements.define("live-icon-light", Light);
     customElements.define("live-icon-blind", Blind);

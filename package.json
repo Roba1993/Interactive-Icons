@@ -1,6 +1,6 @@
 {
   "name": "live-icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Plain JS Webcomponents Live Icons based upon SVG",
   "main": "index.js",
   "scripts": {
