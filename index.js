@@ -13,7 +13,7 @@ window.registerInteractiveIcons = function() {
 /**
  * Weather Icon to visualize the actual weather condition
  */
-class Weather extends HTMLElement {
+export class Weather extends HTMLElement {
     constructor() {
         super();
 
@@ -100,7 +100,7 @@ class Weather extends HTMLElement {
  * power: Float value between 0.0 and 1.0
  * color: HTML color string for the light bulb on color
  */
-class Light extends HTMLElement {
+export class Light extends HTMLElement {
     constructor() {
         super();
 
@@ -195,7 +195,7 @@ class Light extends HTMLElement {
  * open: Float between 0.0 and 1.0 to define how much the blind is lowered
  * angle: Float between 0.0 and 1.0 to define how much the blind is tilted
  */
-class Blind extends HTMLElement {
+export class Blind extends HTMLElement {
     constructor() {
         super();
 
@@ -267,7 +267,7 @@ class Blind extends HTMLElement {
  * value: The actual value of consumption to show
  * max: The maximal value reachable (red area)
  */
-class Meter extends HTMLElement {
+export class Meter extends HTMLElement {
     constructor() {
         super();
 
@@ -354,7 +354,7 @@ class Meter extends HTMLElement {
  * Attributes:
  * power: Integer either 0 or 1 to visualize the status
  */
-class Socket extends HTMLElement {
+export class Socket extends HTMLElement {
     constructor() {
         super();
 
