@@ -1,6 +1,8 @@
 # Live-Icons
 Plain JS Interactive Icons based upon SVG [demo here](https://roba1993.github.io/Live-Icons/)
 
+[![NPM](https://nodei.co/npm/live-icons.png)](https://nodei.co/npm/live-icons/)
+
 ### Library goals
 * Dependency free library
 * Easy to use, understand and to extend
