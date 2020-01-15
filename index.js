@@ -237,8 +237,8 @@ export class Blind extends HTMLElement {
         this._angle = 0.0;
         this._animation_timestamp = null;
         this._animation_speed = 0.4;
-        this._animation_open = 0.0;
-        this._animation_angle = 0.0;
+        this._animation_open = null;
+        this._animation_angle = null;
     }
 
     connectedCallback() {
@@ -263,27 +263,27 @@ export class Blind extends HTMLElement {
 
         // when the animation open is close enough, just set it straight (to not un endlessly over und underadjusting)
         if (Math.abs(this._open - this._animation_open) <= speed) {
-            this._animation_open = parseFloat(this._animation_open);
+            this._animation_open = parseFloat(this._open);
         }
         // subtract to the right direction
         else if (Math.sign(this._open - this._animation_open) == -1) {
             this._animation_open = parseFloat(this._animation_open) - parseFloat(speed);
         }
         // add towards the right direction
-        else {
+        else if (Math.sign(this._open - this._animation_open) == 1) {
             this._animation_open = parseFloat(this._animation_open) + parseFloat(speed);
         }
 
         // when the animation angle is close enough, just set it straight (to not un endlessly over und underadjusting)
         if (Math.abs(this._angle - this._animation_angle) <= speed) {
-            this._animation_angle = parseFloat(this._animation_angle);
+            this._animation_angle = parseFloat(this._angle);
         }
         // subtract to the right direction
         else if (Math.sign(this._angle - this._animation_angle) == -1) {
             this._animation_angle = parseFloat(this._animation_angle) - parseFloat(speed);
         }
         // add towards the right direction
-        else {
+        else if (Math.sign(this._angle - this._animation_angle) == 1) {
             this._animation_angle = parseFloat(this._animation_angle) + parseFloat(speed);
         }
 
@@ -355,13 +355,47 @@ export class Meter extends HTMLElement {
 
         this._value = 0;
         this._max = 9999;
+        this._animation_value = 0;
+        this._animation_timestamp = null;
+        this._animation_speed = 4.0;
     }
 
     connectedCallback() {
         if (!this.shadowRoot) {
             this.attachShadow({ mode: 'open' });
-            this.render();
+            this.update();
         }
+    }
+
+    update(timestamp) {
+        // Only update and continue to render, when needed
+        if (this._value == this._animation_value) {
+            return;
+        }
+
+        // calculate the speed to render the new animation
+        var speed = parseFloat(this._animation_speed / (timestamp - this._animation_timestamp));
+        if (!speed || speed == NaN) speed = 0;
+
+        // set the new time point to be able to calculate the speed the next time
+        this._animation_timestamp = parseInt(timestamp);
+
+        // when the render power is close enough, just set it straight (to not un endlessly over und underadjusting)
+        if (Math.abs(this._value - this._animation_value) <= speed) {
+            this._animation_value = parseFloat(this._power);
+        }
+        // subtract to the right direction
+        else if (Math.sign(this._value - this._animation_value) == -1) {
+            this._animation_value = parseFloat(this._animation_value) - parseFloat(speed);
+        }
+        // add towards the right direction
+        else {
+            this._animation_value = parseFloat(this._animation_value) + parseFloat(speed);
+        }
+
+        // rerender
+        this.render();
+        window.requestAnimationFrame(this.update.bind(this));
     }
 
     render() {
@@ -369,12 +403,12 @@ export class Meter extends HTMLElement {
             return;
         }
 
-        var v = '' + Math.round(this._value);
+        var v = '' + Math.round(this._animation_value);
         while (v.length < 4) {
             v = ' ' + v;
         }
 
-        var r = ((this._value / this._max) * 180) - 90;
+        var r = ((this._animation_value / this._max) * 180) - 90;
 
         this.shadowRoot.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 64 64" xml:space="preserve">
@@ -412,7 +446,7 @@ export class Meter extends HTMLElement {
 
     attributeChangedCallback(name, oldVal, newVal) {
         this["_" + name] = newVal;
-        this.render();
+        this.update();
     }
 
     safeSetAttribute(name, value) {
