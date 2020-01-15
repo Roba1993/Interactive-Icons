@@ -1,7 +1,7 @@
 /**
  * Function to register all icons as custom elements.
  */
-window.registerInteractiveIcons = function() {
+window.registerInteractiveIcons = function () {
     customElements.define("live-icon-weather", Weather);
     customElements.define("live-icon-light", Light);
     customElements.define("live-icon-blind", Blind);
@@ -104,25 +104,59 @@ export class Light extends HTMLElement {
     constructor() {
         super();
 
-        this._power = 0.0;
+        this._power = 0.00;
+        this._render_power = null;
+        this._animation_speed = 0.4;
+        this._animation_timestamp = null;
         this._color = "#ffdb55";
     }
 
     connectedCallback() {
         if (!this.shadowRoot) {
             this.attachShadow({ mode: 'open' });
-            this.render();
+            this.update();
         }
+    }
+
+    update(timestamp) {
+        // Only update and continue to render, when needed
+        if (this._power == this._render_power) {
+            return;
+        }
+
+        // calculate the speed to render the new animation
+        var speed = parseFloat(this._animation_speed / (timestamp - this._animation_timestamp));
+        if (!speed || speed == NaN) speed = 0;
+
+        // set the new time point to be able to calculate the speed the next time
+        this._animation_timestamp = parseInt(timestamp);
+
+        // when the render power is close enough, just set it straight (to not un endlessly over und underadjusting)
+        if (Math.abs(this._power - this._render_power) <= speed) {
+            this._render_power = parseFloat(this._power);
+        }
+        // subtract to the right direction
+        else if (Math.sign(this._power - this._render_power) == -1) {
+            this._render_power = parseFloat(this._render_power) - parseFloat(speed);
+        }
+        // add towards the right direction
+        else {
+            this._render_power = parseFloat(this._render_power) + parseFloat(speed);
+        }
+
+        // rerender
+        this.render();
+        window.requestAnimationFrame(this.update.bind(this));
     }
 
     power_scale(index) {
         var lower = 0.2 * index;
         var higher = 0.2 * (index + 1);
 
-        if (this._power >= lower && this._power <= higher) {
-            return 80 - (400 * (this._power - lower));
+        if (this._render_power >= lower && this._render_power <= higher) {
+            return 80 - (400 * (this._render_power - lower));
         }
-        else if (this._power <= lower) {
+        else if (this._render_power <= lower) {
             return 80;
         }
         else {
@@ -134,7 +168,7 @@ export class Light extends HTMLElement {
         if (this.shadowRoot === null) {
             return;
         }
-        var c = this._power <= 0 ? "#E2ECF1" : this._color;
+        var c = this._render_power <= 0 ? "#E2ECF1" : this._color;
 
         this.shadowRoot.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 550 550" xml:space="preserve">                   
@@ -170,7 +204,7 @@ export class Light extends HTMLElement {
 
     attributeChangedCallback(name, oldVal, newVal) {
         this["_" + name] = newVal;
-        this.render();
+        this.update();
     }
 
     safeSetAttribute(name, value) {
