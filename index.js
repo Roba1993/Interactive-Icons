@@ -355,16 +355,17 @@ export class Meter extends HTMLElement {
 
         this._value = 0;
         this._max = 9999;
-        this._animation_value = 0;
+        this._animation_value = null;
         this._animation_timestamp = null;
-        this._animation_speed = 4.0;
+        this._animation_speed = 750.0;
     }
 
     connectedCallback() {
         if (!this.shadowRoot) {
             this.attachShadow({ mode: 'open' });
-            this.update();
         }
+
+        this.update();
     }
 
     update(timestamp) {
@@ -377,12 +378,15 @@ export class Meter extends HTMLElement {
         var speed = parseFloat(this._animation_speed / (timestamp - this._animation_timestamp));
         if (!speed || speed == NaN) speed = 0;
 
+        // never allow more change than 100 units
+        if (speed > 50) speed = 100;
+
         // set the new time point to be able to calculate the speed the next time
         this._animation_timestamp = parseInt(timestamp);
 
         // when the render power is close enough, just set it straight (to not un endlessly over und underadjusting)
         if (Math.abs(this._value - this._animation_value) <= speed) {
-            this._animation_value = parseFloat(this._power);
+            this._animation_value = parseFloat(this._value);
         }
         // subtract to the right direction
         else if (Math.sign(this._value - this._animation_value) == -1) {
@@ -400,6 +404,7 @@ export class Meter extends HTMLElement {
 
     render() {
         if (this.shadowRoot === null) {
+            window.requestAnimationFrame(this.render.bind(this));
             return;
         }
 
