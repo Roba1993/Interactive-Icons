@@ -12,15 +12,22 @@ window.registerInteractiveIcons = function () {
 
 /**
  * Weather Icon to visualize the actual weather condition
+ * 
+ * Attributes:
+ * status: Available Status are
+ *          - sun
+ *          - cloud
+ *          - cloud_sun
+ *          - thunder
  */
 export class Weather extends HTMLElement {
     constructor() {
         super();
 
-        this._power = 0.0;
-        this._color = "#ffdb55";
+        this._status = "sun";
 
         this.sun_rot = 2;
+        this.thunder = 0;
         this.last_time = performance.now();
     }
 
@@ -48,16 +55,20 @@ export class Weather extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 550 550" xml:space="preserve">                   
-            <g id="sun" transform="translate(275, 275)" >
+            <g id="sun" transform="translate(275, 275)" visibility="${['sun', 'cloud_sun'].indexOf(this._status) + 1 ? 'visible' : 'hidden'}">
                 <circle r="80" stroke="#ffdb55" stroke-width="21" fill="#ffdb55" />
                 ${sunshine}
             </g>
 
-            <g id="cloud" transform="translate(0, -125)">
-                <path fill="#CEE2F1" d="M320,128c52.562,0,95.375,42.438,96,94.813c-0.25,1.938-0.438,3.875-0.5,5.875l-0.812,23.5l22.25,7.75
-                    C462.688,268.906,480,293.062,480,320c0,35.312-28.688,64-64,64H96c-35.281,0-64-28.688-64-64c0-34.938,28.188-63.438,63-64
-                    c1.5,0.219,3.063,0.406,4.625,0.5l24.313,1.594l8-22.969C140.938,209.313,165.063,192,192,192c3.125,0,6.563,0.375,11.188,1.188
-                    l22.406,4.031l11.156-19.844C253.875,146.938,285.75,128,320,128 z"/>
+            <g id="cloud" transform="scale(1.05, 0.9) translate(0, -100)" visibility="${['cloud', 'cloud_sun', 'thunder'].indexOf(this._status) + 1 ? 'visible' : 'hidden'}">
+                <path fill="#CEE2F1" d="M429.382,412.512c45.629,0,82.618-36.99,82.618-82.619c0-39.196-27.305-71.994-63.925-80.468
+                c-0.749-82.934-68.2-149.937-151.311-149.937c-57.06,0-106.735,31.585-132.518,78.221c-7.845-3.395-16.492-5.285-25.583-5.285
+                c-32.75,0-59.779,24.421-63.917,56.042C32.131,236.916,0,274.498,0,319.594c0,51.318,41.601,92.918,92.917,92.918
+                C107.211,412.512,419.589,412.512,429.382,412.512z"/>
+            </g>
+
+            <g transform="scale(0.2, 0.3) translate(900, 750)" visibility="${['thunder'].indexOf(this._status) + 1 ? 'visible' : 'hidden'}">
+                <path fill="#ffdb55" d="M377.5,10L10,500h367.5l-245,490L990,377.5H500L867.5,10H377.5z"/>
             </g>
         </svg>
         `;
@@ -66,25 +77,19 @@ export class Weather extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['power', 'color'];
+        return ['status'];
     }
-
 
     attributeChangedCallback(name, oldVal, newVal) {
         this["_" + name] = newVal;
-        //this.render();
     }
 
     safeSetAttribute(name, value) {
         if (this.getAttribute(name) !== value) this.setAttribute(name, value);
     }
 
-    set power(power) {
-        this.safeSetAttribute("power", power);
-    }
-
-    set color(color) {
-        this.safeSetAttribute("color", color);
+    set status(status) {
+        this.safeSetAttribute("status", status);
     }
 }
 
